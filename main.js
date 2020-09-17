@@ -26,3 +26,7 @@ goto_results('result-list-desktop', result)
 localStorage.setItem("nonextbuttoncookie", result)
 }
 }
+if (result>=entriesnumber) {
+localStorage.removeItem("nonextbuttoncookie")
+window.alert("Advanced Search Complete!")
+}
