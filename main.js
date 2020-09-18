@@ -1,4 +1,8 @@
-var speed = window.prompt("Do you want to see each word or each page?(type word or page)")
+speed = localStorage.getItem('speed')
+if (speed == null) {
+speed = window.prompt("Do you want to see each word or each page?(type word or page)")
+localStorage.setItem('speed', speed)
+}
 if (speed == "word") {
 cookiechecker = localStorage.getItem('nonextbuttoncookie')
 var entriesnumberchecker = document.getElementsByTagName('h4')[2].childNodes[2].textContent
@@ -12,6 +16,7 @@ abort = window.confirm("Main Entry: "+document.getElementsByClassName("entry-tex
 result = JSON.parse(result)+1
 if (abort == false || abort1 == false) {
 localStorage.removeItem("nonextbuttoncookie")
+localStorage.removeItem('speed')
 window.alert("Advanced Search Aborted Successfully!");
 throw new Error('(Not A Real Error)Advanced Search Aborted Successfully');
 //This isn't really an error...it's just an easy way to stop JS execution.//
@@ -31,6 +36,7 @@ abort1 = window.confirm("Main Entry: "+document.getElementsByClassName("entry-te
 result = JSON.parse(result)+1
 if (abort == false || abort1 == false) {
 localStorage.removeItem("nonextbuttoncookie")
+localStorage.removeItem('speed')
 window.alert("Advanced Search Aborted Successfully!");
 throw new Error('(Not A Real Error)Advanced Search Aborted');
 //This isn't really an error...it's just an easy way to stop JS execution.//
@@ -44,6 +50,7 @@ localStorage.setItem("nonextbuttoncookie", result)
 }
 if (result>=entriesnumber) {
 localStorage.removeItem("nonextbuttoncookie")
+localStorage.removeItem('speed')
 window.alert("Advanced Search Complete!")
 }
 } else if (speed == "page") {
@@ -59,6 +66,7 @@ abort2 = window.confirm (document.getElementsByClassName("entry-text")[0].innerH
 result = JSON.parse(result)+31
 if (abort2 == false || abort3 == false) {
 localStorage.removeItem('nonextbuttoncookie')
+localStorage.removeItem('speed')
 window.alert("Advanced Search Aborted Successfully!");
 throw new Error('(Not A Real Error)Advanced Search Aborted Successfully');
 //This isn't really an error...it's just an easy way to stop JS execution.//
@@ -74,6 +82,7 @@ abort3 = window.confirm (document.getElementsByClassName("entry-text")[0].innerH
 "entry-text")[15].innerHTML+", "+document.getElementsByClassName("entry-text")[16].innerHTML+", "+document.getElementsByClassName("entry-text")[17].innerHTML+", "+document.getElementsByClassName("entry-text")[18].innerHTML+", "+document.getElementsByClassName("entry-text")[19].innerHTML+", "+document.getElementsByClassName("entry-text")[20].innerHTML+", "+document.getElementsByClassName("entry-text")[21].innerHTML+", "+document.getElementsByClassName("entry-text")[20].innerHTML+", "+document.getElementsByClassName("entry-text")[23].innerHTML+", "+document.getElementsByClassName("entry-text")[22].innerHTML+", "+document.getElementsByClassName("entry-text")[25].innerHTML+", "+document.getElementsByClassName("entry-text")[23].innerHTML+", "+document.getElementsByClassName("entry-text")[27].innerHTML+", "+document.getElementsByClassName("entry-text")[24].innerHTML+", "+document.getElementsByClassName("entry-text")[29].innerHTML)
 if (abort2 == false || abort3 == false) {
 localStorage.removeItem('nonextbuttoncookie')
+localStorage.removeItem('speed')
 window.alert("Advanced Search Aborted Successfully!");
 throw new Error('(Not A Real Error)Advanced Search Aborted Successfully');
 //This isn't really an error...it's just an easy way to stop JS execution.//
@@ -86,8 +95,9 @@ localStorage.setItem("nonextbuttoncookie", result)
 }
 if (result>=entriesnumber) {
 localStorage.removeItem("nonextbuttoncookie")
+localStorage.removeItem('speed')
 window.alert("Advanced Search Complete!")
 }
 } else {
-window.alert("That is an invalid answer. Try again")
+window.alert("That is an invalid answer. Try again");
 }
