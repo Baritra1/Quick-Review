@@ -66,7 +66,7 @@ eval("var confirmcontents"+[i]+" = \"\"")
 eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
 eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
 }
-abort2 = window.confirm(wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9+", "+wordres10+", "+wordres11+", "+wordres12+", "+wordres13+", "+wordres14+", "+wordres15+", "+wordres16+", "+wordres17+", "+wordres18+", "+wordres19+", "+wordres20+", "+wordres21+", "+wordres22+", "+wordres23+", "+wordres24+", "+wordres25+", "+wordres26+", "+wordres27+", "+wordres28+", "+wordres29)
+abort2 = window.confirm("Page "+((cookiechecker/31)+1)+":\n"+wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9+", "+wordres10+", "+wordres11+", "+wordres12+", "+wordres13+", "+wordres14+", "+wordres15+", "+wordres16+", "+wordres17+", "+wordres18+", "+wordres19+", "+wordres20+", "+wordres21+", "+wordres22+", "+wordres23+", "+wordres24+", "+wordres25+", "+wordres26+", "+wordres27+", "+wordres28+", "+wordres29)
 result = JSON.parse(result)+31
 if (abort2 == false || abort3 == false) {
 eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
@@ -87,7 +87,7 @@ eval("var confirmcontents"+[i]+" = \"\"")
 eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
 eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
 }
-abort2 = window.confirm(wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9+", "+wordres10+", "+wordres11+", "+wordres12+", "+wordres13+", "+wordres14+", "+wordres15+", "+wordres16+", "+wordres17+", "+wordres18+", "+wordres19+", "+wordres20+", "+wordres21+", "+wordres22+", "+wordres23+", "+wordres24+", "+wordres25+", "+wordres26+", "+wordres27+", "+wordres28+", "+wordres29)
+abort3 = window.confirm("Page "+((cookiechecker/31)+1)+":\n"+wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9+", "+wordres10+", "+wordres11+", "+wordres12+", "+wordres13+", "+wordres14+", "+wordres15+", "+wordres16+", "+wordres17+", "+wordres18+", "+wordres19+", "+wordres20+", "+wordres21+", "+wordres22+", "+wordres23+", "+wordres24+", "+wordres25+", "+wordres26+", "+wordres27+", "+wordres28+", "+wordres29)
 if (abort2 == false || abort3 == false) {
 eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
 eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
@@ -108,4 +108,6 @@ window.alert("Advanced Search Complete!")
 }
 } else {
 window.alert("That is an invalid answer. Try again");
+eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
 }
+
