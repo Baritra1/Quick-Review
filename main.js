@@ -1,6 +1,6 @@
 speed = eval("localStorage.getItem('speed"+document.getElementById("search-word").value+"')")
 if (speed == null) {
-speed = window.prompt("Do you want to see each word or each page?(type word or page)")
+speed = window.prompt("Do you want to see each word or each page?(type word or page)","word/page")
 eval("localStorage.setItem('speed"+document.getElementById("search-word").value+"', speed)")
 }
 if (speed == "word") {
@@ -110,4 +110,3 @@ window.alert("Advanced Search Complete!")
 window.alert("That is an invalid answer. Try again");
 eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
 }
-
