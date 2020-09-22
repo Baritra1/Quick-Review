@@ -1,6 +1,6 @@
 if (navigator.cookieEnabled == false) {
     alert("Your cookies are not enabled. This application requires cookies to be enabled to work. Try doing /blockedcookieinfo for more information about how to fix this issue.")
-    throw new Error('(Not A Real Error) Must Enable Cookies')
+    throw('(Not A Real Error) Must Enable Cookies')
     }
     speed = eval("localStorage.getItem('speed"+document.getElementById("search-word").value+"')")
     if (speed == null) {
@@ -22,13 +22,14 @@ if (navigator.cookieEnabled == false) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     window.alert("Quick Review Aborted Successfully!");
-    throw new Error('(Not A Real Error)Quick Review Aborted Successfully');
+    throw('(Not A Real Error)Quick Review Aborted Successfully');
     //This isn't really an error...it's just an easy way to stop JS execution.//
     }
     }
     if (document.getElementsByClassName("entry-text")[i] = "undefined" && result<entriesnumber) {
     result = JSON.parse(result)+1
     goto_results('result-list-desktop', result)
+    document.getElementById("search-word").style.display = "none"
     eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
     }
     }
@@ -42,12 +43,13 @@ if (navigator.cookieEnabled == false) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     window.alert("Quick Review Aborted Successfully!");
-    throw new Error('(Not A Real Error)Quick Review Aborted');
+    throw('(Not A Real Error)Quick Review Aborted');
     //This isn't really an error...it's just an easy way to stop JS execution.//
     }
     }
     if (document.getElementsByClassName("entry-text")[i] = "undefined" && result<entriesnumber) {
     goto_results('result-list-desktop', result)
+    document.getElementById("search-word").style.display = "none"
     eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
     }
     }
@@ -81,6 +83,7 @@ if (navigator.cookieEnabled == false) {
     }
     if (result<entriesnumber) {
     goto_results('result-list-desktop', result)
+    document.getElementById("search-word").style.display = "none"
     eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
     }
     }
@@ -105,6 +108,7 @@ if (navigator.cookieEnabled == false) {
     if (result<entriesnumber) {
     result = JSON.parse(result)+30
     goto_results('result-list-desktop', result)
+    document.getElementById("search-word").style.display = "none"
     eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
     }
     }
