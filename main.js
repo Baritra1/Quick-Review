@@ -4,7 +4,7 @@ if (navigator.cookieEnabled == false) {
     }
     speed = eval("localStorage.getItem('speed"+document.getElementById("search-word").value+"')")
     if (speed == null) {
-    speed = window.prompt("Do you want to see each word or each page?(type word or page, or \n/options for more info)","word/page")
+    speed = window.prompt("Do you want to see each word or each page?(type word or page, or \n/commands for more info)","word/page")
     eval("localStorage.setItem('speed"+document.getElementById("search-word").value+"', speed)")
     }
     if (speed == "word") {
@@ -116,8 +116,11 @@ if (navigator.cookieEnabled == false) {
     } else if (speed == "/changelog") {
     window.alert("You can find the official Quick Review Changelog here:\nrb.gy/sv2qwb")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
-    } else if (speed == "/options") {
-    window.alert("These are the current options:\n1.word\n2.page\n3./changelog\n4./options\n5./blockedcookieinfo")
+    } else if (speed == "/commands") {
+    window.alert("These are the current commands:\n1.word\n2.page\n3./changelog\n4./commands\n5./blockedcookieinfo\n6./credits")
+    eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
+    } else if (speed == "/credits") {
+    window.alert("Credits:\nProgrammer: Aritra Banerjee\nAlpha Tester: Aaron Chang")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     } else if (speed == "/blockedcookieinfo") {
     window.alert("Chrome Users: Click the three dots on the top right, then click Settings, then click on the \"Privacy & Security\" tab on the left side, click on \"Cookies and other site data\" and set it to \"Allow all cookies\".\n\nSafari Users: Click on the Safari Tab on the top left of your screen, click Preferences on the Drop-Down menu, then click on the Privacy tab and unselect the option for \"Block all cookies\".\n\nFirefox Users: Click the menu button and select options, then select the \"Privacy & Security\" tab on the left and check the option for \"Standard\".")
@@ -126,7 +129,7 @@ if (navigator.cookieEnabled == false) {
     window.alert("Quick Review Aborted Successfully!")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     } else{
-    window.alert("That is not an option. Try again.");
+    window.alert("That is not an option. Try again.(Note: Put a forward-slash before all commands except for word and page.)");
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     }
     
