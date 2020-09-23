@@ -17,7 +17,11 @@ if (navigator.cookieEnabled == false) {
     var abort1 = true
     if (cookiechecker == null) {
     for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
     abort = window.confirm("Word "+(JSON.parse(result)+1)+":\nMain Entry: "+document.getElementsByClassName("entry-text")[i].innerHTML+"\nPart of Speech: "+document.getElementsByClassName("word-class")[i].innerHTML)
+    } else {
+    abort = window.confirm("Word "+(JSON.parse(result)+1)+":\nMain Entry: "+JSON.parse(JSON.stringify(document.getElementsByClassName("entry-text")[i].textContent)).slice(1)+"\nSense: "+document.getElementsByClassName("entry-text")[i].children[0].innerHTML+"\nPart of Speech: "+document.getElementsByClassName("word-class")[i].innerHTML)
+    }
     result = JSON.parse(result)+1
     if (abort == false || abort1 == false) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
@@ -38,7 +42,11 @@ if (navigator.cookieEnabled == false) {
     result = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     JSON.parse(result)
     for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
-    abort1 = window.confirm("Word "+JSON.parse(result)+":\nMain Entry: "+document.getElementsByClassName("entry-text")[i].innerHTML+"\nPart of Speech: "+document.getElementsByClassName("word-class")[i].innerHTML)
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
+    abort = window.confirm("Word "+(JSON.parse(result)+1)+":\nMain Entry: "+document.getElementsByClassName("entry-text")[i].innerHTML+"\nPart of Speech: "+document.getElementsByClassName("word-class")[i].innerHTML)
+    } else {
+    abort = window.confirm("Word "+(JSON.parse(result)+1)+":\nMain Entry: "+JSON.parse(JSON.stringify(document.getElementsByClassName("entry-text")[i].textContent)).slice(1)+"\nSense: "+document.getElementsByClassName("entry-text")[i].children[0].innerHTML+"\nPart of Speech: "+document.getElementsByClassName("word-class")[i].innerHTML)
+    }
     result = JSON.parse(result)+1
     if (abort == false || abort1 == false) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
@@ -66,13 +74,17 @@ if (navigator.cookieEnabled == false) {
     var entriesnumberchecker = document.getElementsByTagName('h4')[2].childNodes[2].textContent
     var entriesnumber = JSON.parse(JSON.parse(JSON.stringify(entriesnumberchecker)).split(" ",2)[0]-1)
     var result = 0
-    var resultexcep = 0
+    var resultexcep = 1
     var abort2 = true
     var abort3 = true
     if (cookiechecker == null) {
     for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
     eval("var confirmcontents"+[i]+" = \"\"")
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
+    } else {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
+    }
     eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
     result = JSON.parse(result)+1
     }
@@ -95,7 +107,11 @@ if (navigator.cookieEnabled == false) {
     result = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
     eval("var confirmcontents"+[i]+" = \"\"")
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
+    } else {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
+    }
     eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
     result = JSON.parse(result)+1
     }
@@ -127,13 +143,17 @@ if (navigator.cookieEnabled == false) {
     var entriesnumberchecker = document.getElementsByTagName('h4')[2].childNodes[2].textContent
     var entriesnumber = JSON.parse(JSON.parse(JSON.stringify(entriesnumberchecker)).split(" ",2)[0]-1)
     var result = 0
-    var resultexcep = 0
+    var resultexcep = 1
     var abort2 = true
     var abort3 = true
     if (cookiechecker == null) {
     for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
     eval("var confirmcontents"+[i]+" = \"\"")
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
+    } else {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
+    }
     eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
     result = JSON.parse(result)+1
     }
@@ -155,7 +175,11 @@ if (navigator.cookieEnabled == false) {
     result = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
     eval("var confirmcontents"+[i]+" = \"\"")
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
+    } else {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
+    }
     eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
     result = JSON.parse(result)+1
     }
@@ -198,9 +222,11 @@ if (navigator.cookieEnabled == false) {
         case "/blockedcookieinfo":
     window.alert("Chrome Users: Click the three dots on the top right, then click Settings, then click on the \"Privacy & Security\" tab on the left side, click on \"Cookies and other site data\" and set it to \"Allow all cookies\".\n\nSafari Users: Click on the Safari Tab on the top left of your screen, click Preferences on the Drop-Down menu, then click on the Privacy tab and unselect the option for \"Block all cookies\".\n\nFirefox Users: Click the menu button and select options, then select the \"Privacy & Security\" tab on the left and check the option for \"Standard\".")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
-        case speed == null:
-    window.alert("Quick Review Aborted Successfully!")
+    break;
+        case null:
+    window.alert("Quick Review Cancelled!")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
+    break;
         default:
     window.alert("That is not an option. Try again.(Note: Put a forward-slash before all commands except for word and page.)");
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
