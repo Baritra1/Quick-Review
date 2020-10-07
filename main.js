@@ -69,11 +69,15 @@ if (navigator.cookieEnabled == false) {
     }
     break;
         case "page":
-    if (location.pathname == "/advanced-search.php") {
+    var pagenumber = eval("localStorage.getItem('pagenumber"+document.getElementById("search-word").value+"')")
+    if (pagenumber == null) {
+    var pagenumber = 1
+    }
     var cookiechecker = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     var entriesnumberchecker = document.getElementsByTagName('h4')[2].childNodes[2].textContent
     var entriesnumber = JSON.parse(JSON.parse(JSON.stringify(entriesnumberchecker)).split(" ",2)[0]-1)
     var result = 0
+    var confirmcontents = ""
     var resultexcep = 1
     var abort2 = true
     var abort3 = true
@@ -84,92 +88,25 @@ if (navigator.cookieEnabled == false) {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
     } else {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
-    }
-    eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
+    } 
+    eval("confirmcontents = confirmcontents + eval(confirmcontents"+[i]+")+\", \"") 
     result = JSON.parse(result)+1
     }
-    abort2 = window.confirm("Page 1"+":\n"+wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9)
-    result = JSON.parse(result)+1
+    abort2 = window.confirm("Page "+(JSON.parse(pagenumber))+":\n"+confirmcontents)
     if (abort2 == false || abort3 == false) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
+    eval("localStorage.removeItem('pagenumber"+document.getElementById("search-word").value+"')")
     window.alert("Quick Review Aborted Successfully!");
     throw new Error('(Not A Real Error)Quick Review Aborted Successfully!');
     //This isn't really an error...it's just an easy way to stop JS execution.//
     }
     if (result<entriesnumber) {
     goto_results('result-list-desktop', result)
+    pagenumber++
     document.getElementsByClassName("main-search")[0].style.display = "none"
     eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
-    }
-    }
-    else {
-    result = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
-    for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
-    eval("var confirmcontents"+[i]+" = \"\"")
-    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
-    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
-    } else {
-    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
-    }
-    eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
-    result = JSON.parse(result)+1
-    }
-    if (result >= 11) {
-    resultexcep = (((JSON.parse(result)-1)/10))
-    }
-    abort3 = window.confirm("Page "+(resultexcep)+":\n"+wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9)
-    if (abort2 == false || abort3 == false) {
-    eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
-    eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
-    window.alert("Quick Review Aborted Successfully!");
-    throw new Error('(Not A Real Error)Quick Review Aborted Successfully!');
-    //This isn't really an error...it's just an easy way to stop JS execution.//
-    }
-    if (result<entriesnumber) {
-    goto_results('result-list-desktop', result)
-    document.getElementsByClassName("main-search")[0].style.display = "none"
-    eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
-    }
-    }
-    if (result>=entriesnumber) {
-    eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
-    eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
-    window.alert("Quick Review Complete!")
-    }
-    
-    } else{
-    var cookiechecker = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
-    var entriesnumberchecker = document.getElementsByTagName('h4')[2].childNodes[2].textContent
-    var entriesnumber = JSON.parse(JSON.parse(JSON.stringify(entriesnumberchecker)).split(" ",2)[0]-1)
-    var result = 0
-    var resultexcep = 1
-    var abort2 = true
-    var abort3 = true
-    if (cookiechecker == null) {
-    for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
-    eval("var confirmcontents"+[i]+" = \"\"")
-    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
-    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
-    } else {
-    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
-    }
-    eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
-    result = JSON.parse(result)+1
-    }
-    abort2 = window.confirm("Page "+(resultexcep)+":\n"+wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9+", "+wordres10+", "+wordres11+", "+wordres12+", "+wordres13+", "+wordres14+", "+wordres15+", "+wordres16+", "+wordres17+", "+wordres18+", "+wordres19+", "+wordres20+", "+wordres21+", "+wordres22+", "+wordres23+", "+wordres24+", "+wordres25+", "+wordres26+", "+wordres27+", "+wordres28+", "+wordres29)
-    result = JSON.parse(result)+1
-    if (abort2 == false || abort3 == false) {
-    eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
-    eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
-    window.alert("Quick Review Aborted Successfully!");
-    throw new Error('(Not A Real Error)Quick Review Aborted Successfully!');
-    //This isn't really an error...it's just an easy way to stop JS execution.//
-    }
-    if (result<entriesnumber) {
-    goto_results('result-list-desktop', result)
-    document.getElementsByClassName("main-search")[0].style.display = "none"
-    eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
+    eval("localStorage.setItem('pagenumber"+document.getElementById("search-word").value+"', pagenumber)")
     }
     } else {
     result = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
@@ -180,31 +117,31 @@ if (navigator.cookieEnabled == false) {
     } else {
     eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
     }
-    eval("wordres"+[i]+" = eval(confirmcontents"+[i]+")")
+    eval("confirmcontents = confirmcontents + eval(confirmcontents"+[i]+")+\", \"") 
     result = JSON.parse(result)+1
     }
-    if (result >= 31) {
-    resultexcep = (((JSON.parse(result)-1)/30))
-    }
-    abort3 = window.confirm("Page "+(resultexcep)+":\n"+wordres0+", "+wordres1+", "+wordres2+", "+wordres3+", "+wordres4+", "+wordres5+", "+wordres6+", "+wordres7+", "+wordres8+", "+wordres9+", "+wordres10+", "+wordres11+", "+wordres12+", "+wordres13+", "+wordres14+", "+wordres15+", "+wordres16+", "+wordres17+", "+wordres18+", "+wordres19+", "+wordres20+", "+wordres21+", "+wordres22+", "+wordres23+", "+wordres24+", "+wordres25+", "+wordres26+", "+wordres27+", "+wordres28+", "+wordres29)
+    abort3 = window.confirm("Page "+(JSON.parse(pagenumber))+":\n"+confirmcontents)
     if (abort2 == false || abort3 == false) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
+    eval("localStorage.removeItem('pagenumber"+document.getElementById("search-word").value+"')")
     window.alert("Quick Review Aborted Successfully!");
     throw new Error('(Not A Real Error)Quick Review Aborted Successfully!');
     //This isn't really an error...it's just an easy way to stop JS execution.//
     }
     if (result<entriesnumber) {
+    pagenumber++
     goto_results('result-list-desktop', result)
     document.getElementsByClassName("main-search")[0].style.display = "none"
     eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
+    eval("localStorage.setItem('pagenumber"+document.getElementById("search-word").value+"', pagenumber)")
     }
     }
     if (result>=entriesnumber) {
     eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     window.alert("Quick Review Complete!")
-    }
+    eval("localStorage.removeItem('pagenumber"+document.getElementById("search-word").value+"')")
     }
     break;
         case "/changelog":
