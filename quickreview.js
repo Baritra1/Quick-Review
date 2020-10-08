@@ -4,7 +4,7 @@ if (navigator.cookieEnabled == false) {
     }
     speed = eval("localStorage.getItem('speed"+document.getElementById("search-word").value+"')")
     if (speed == null) {
-    speed = window.prompt("Do you want to see each word or each page?(type word or page, or \n/commands for more info)","word/page")
+    speed = window.prompt("Do you want to see each word or each page?(type word or page, or \n/commands for more info)","word/page/listmaker")
     eval("localStorage.setItem('speed"+document.getElementById("search-word").value+"', speed)")
     }
     switch(speed) {
@@ -144,6 +144,72 @@ if (navigator.cookieEnabled == false) {
     eval("localStorage.removeItem('pagenumber"+document.getElementById("search-word").value+"')")
     }
     break;
+        case "listmaker":
+    var pagenumber = eval("localStorage.getItem('pagenumber"+document.getElementById("search-word").value+"')")
+    if (pagenumber == null) {
+    var pagenumber = 1
+    }
+    var cookiechecker = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
+    var entriesnumberchecker = document.getElementsByTagName('h4')[2].childNodes[2].textContent
+    var entriesnumber = JSON.parse(JSON.parse(JSON.stringify(entriesnumberchecker)).split(" ",2)[0]-1)
+    var result = 0
+    var confirmcontents = ""
+    var resultexcep = 1
+    var abort2 = true
+    var abort3 = true
+    var listcookie = eval("localStorage.getItem('listcookie"+document.getElementById("search-word").value+"')")
+    if (listcookie == null) {
+    var listcookie = ""
+    }
+    if (cookiechecker == null) {
+    for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
+    eval("var confirmcontents"+[i]+" = \"\"")
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
+    } else {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
+    } 
+    eval("listcookie = listcookie + eval(confirmcontents"+[i]+")+\"\\n \"") 
+    result = JSON.parse(result)+1
+    }
+    if (result<entriesnumber) {
+    goto_results('result-list-desktop', result)
+    pagenumber++
+    document.getElementsByClassName("main-search")[0].style.display = "none"
+    eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
+    eval("localStorage.setItem('pagenumber"+document.getElementById("search-word").value+"', pagenumber)")
+    eval("localStorage.setItem('listcookie"+document.getElementById("search-word").value+"', listcookie)")
+    }
+    } else {
+    result = eval("localStorage.getItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
+    for (i=0;i<document.getElementsByClassName("entry-text").length;i++) {
+    eval("var confirmcontents"+[i]+" = \"\"")
+    if (document.getElementsByClassName("entry-text")[i].children[0] == undefined) {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\'document.getElementsByClassName(\`entry-text\`)["+[i]+"].innerHTML\')")
+    } else {
+    eval("var confirmcontents"+[i]+" = confirmcontents"+[i]+".concat(\"JSON.parse(JSON.stringify(document.getElementsByClassName(\\\"entry-text\\\")["+[i]+"].textContent)).slice(1)+\\'(sense \"+document.getElementsByClassName(\`entry-text\`)[i].children[0].innerHTML+\")\\'\")")
+    }
+    eval("listcookie = listcookie + eval(confirmcontents"+[i]+")+\"\\n \"") 
+    result = JSON.parse(result)+1
+    }
+    if (result<entriesnumber) {
+    pagenumber++
+    goto_results('result-list-desktop', result)
+    document.getElementsByClassName("main-search")[0].style.display = "none"
+    eval("localStorage.setItem('nonextbuttoncookie"+document.getElementById("search-word").value+"', result)")
+    eval("localStorage.setItem('pagenumber"+document.getElementById("search-word").value+"', pagenumber)")
+    eval("localStorage.setItem('listcookie"+document.getElementById("search-word").value+"', listcookie)")
+    }
+    }
+    if (result>=entriesnumber) {
+    console.log(listcookie);
+    eval("localStorage.removeItem('nonextbuttoncookie"+document.getElementById("search-word").value+"')")
+    eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
+    eval("localStorage.removeItem('listcookie"+document.getElementById("search-word").value+"')")
+    window.alert("Quick Review Complete!")
+    eval("localStorage.removeItem('pagenumber"+document.getElementById("search-word").value+"')")
+    }
+    break;
         case "/changelog":
     window.alert("You can find the official Quick Review Changelog here:\nrb.gy/sv2qwb")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
@@ -156,9 +222,9 @@ if (navigator.cookieEnabled == false) {
     window.alert("Credits:\nProgrammer: Aritra Banerjee\nAlpha Tester: Aaron Chang")
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     break;
-        case "/blockedcookieinfo":
-    window.alert("Chrome Users: Click the three dots on the top right, then click Settings, then click on the \"Privacy & Security\" tab on the left side, click on \"Cookies and other site data\" and set it to \"Allow all cookies\".\n\nSafari Users: Click on the Safari Tab on the top left of your screen, click Preferences on the Drop-Down menu, then click on the Privacy tab and unselect the option for \"Block all cookies\".\n\nFirefox Users: Click the menu button and select options, then select the \"Privacy & Security\" tab on the left and check the option for \"Standard\".")
-    eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
+    case "/blockedcookieinfo":
+        window.alert("Chrome Users: Click the three dots on the top right, then click Settings, then click on the \"Privacy & Security\" tab on the left side, click on \"Cookies and other site data\" and set it to \"Allow all cookies\".\n\nSafari Users: Click on the Safari Tab on the top left of your screen, click Preferences on the Drop-Down menu, then click on the Privacy tab and unselect the option for \"Block all cookies\".\n\nFirefox Users: Click the menu button and select options, then select the \"Privacy & Security\" tab on the left and check the option for \"Standard\".")
+        eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
     break;
         case null:
     window.alert("Quick Review Cancelled!")
@@ -167,5 +233,5 @@ if (navigator.cookieEnabled == false) {
         default:
     window.alert("That is not an option. Try again.(Note: Put a forward-slash before all commands except for word and page.)");
     eval("localStorage.removeItem('speed"+document.getElementById("search-word").value+"')")
-    }
-    
+}
+        
